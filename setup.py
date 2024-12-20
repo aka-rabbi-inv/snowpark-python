@@ -17,6 +17,9 @@ SNOWPARK_SRC_DIR = os.path.join(SRC_DIR, "snowflake", "snowpark")
 MODIN_DEPENDENCY_VERSION = "==0.30.1"  # Snowpark pandas requires modin 0.30.1, which is compatible with pandas 2.2.x
 CONNECTOR_DEPENDENCY_VERSION = ">=3.12.0, <4.0.0"
 CONNECTOR_DEPENDENCY = f"snowflake-connector-python{CONNECTOR_DEPENDENCY_VERSION}"
+PANDAS_REQUIREMENTS = [
+    f"snowflake-connector-python[pandas]{CONNECTOR_DEPENDENCY_VERSION}",
+]
 INSTALL_REQ_LIST = [
     "setuptools>=40.6.0",
     "wheel",
@@ -36,9 +39,6 @@ REQUIRED_PYTHON_VERSION = ">=3.12, <3.13"
 if os.getenv("SNOWFLAKE_IS_PYTHON_RUNTIME_TEST", False):
     REQUIRED_PYTHON_VERSION = ">=3.8"
 
-PANDAS_REQUIREMENTS = [
-    f"snowflake-connector-python[pandas]{CONNECTOR_DEPENDENCY_VERSION}",
-]
 MODIN_REQUIREMENTS = [
     *PANDAS_REQUIREMENTS,
     f"modin{MODIN_DEPENDENCY_VERSION}",
